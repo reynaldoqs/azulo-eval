@@ -1,0 +1,9 @@
+
+#dpaquetes npm instalados
+node_modules
+
+# directorio de salida para la transpilacion de typescript a javascript
+/dist
+
+# configuracion de vs code
+.vscode
