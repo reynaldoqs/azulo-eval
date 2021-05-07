@@ -1,5 +1,6 @@
 import AirtPort from "../models/AirtPort";
-
+import Location from "../models/Location";
+import AirportOperator from "../models/AirportOperator";
 // Cambia el operador de un aeropuerto a otro
 export const changeOperator = (airportId: number, operatorId: number) => {
   return AirtPort.update(
@@ -18,5 +19,26 @@ export const changePriorityOrder = async (...priorityOrders: OrderChange[]) => {
     AirtPort.update({ PriorityOrder: newOrder }, { where: { ID: airportId } })
   );
   await Promise.all(updatePromises);
-  return AirtPort.findAll({ raw: true });
+  return AirtPort.findAll();
+};
+
+// Metodo para obtener todos los aeropuertos
+export const getAirports = async () => {
+  // Metodo para conseguir los datos de las assocciaciones, por alguna razon no esta registrando bien las associaciones
+  //TODO: configure well squilize associations
+  const airports: any = await AirtPort.findAll({ raw: true });
+
+  for (const airport of airports) {
+    airport.location = await Location.findByPk(airport.LocationID, {
+      raw: true,
+    });
+    airport.operator = await AirportOperator.findByPk(
+      airport.AirportOperatorID,
+      {
+        raw: true,
+      }
+    );
+  }
+
+  return airports;
 };

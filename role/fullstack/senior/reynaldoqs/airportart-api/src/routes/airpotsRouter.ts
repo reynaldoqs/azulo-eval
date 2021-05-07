@@ -1,10 +1,24 @@
 import { Router } from "express";
 
-import { changeOperator, changePriorityOrder } from "../controllers";
+import {
+  changeOperator,
+  changePriorityOrder,
+  getAirports,
+} from "../controllers";
 
 const airportsRouter = Router();
 
 // rutas para aeropuertos
+// get para obtener todos los aeropuertos
+airportsRouter.get("/", async (_, res) => {
+  try {
+    const airports = await getAirports();
+    return res.status(200).json({ airports });
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
+});
+
 // patch para cambiar los datos de un aeropuerto
 airportsRouter.patch("/:airportId", async (req, res) => {
   try {

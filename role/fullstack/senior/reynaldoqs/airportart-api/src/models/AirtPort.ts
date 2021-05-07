@@ -24,7 +24,7 @@ interface AirportInstance
 }
 
 // Modelo Sequilize para la tabla Airport
-const Airport = sequelize.define<AirportInstance>(
+const AirtPort = sequelize.define<AirportInstance>(
   "AirPort",
   {
     ID: {
@@ -53,16 +53,16 @@ const Airport = sequelize.define<AirportInstance>(
   }
 );
 /*
-Airport.hasMany(Location, {
+AirtPort.belongsTo(Location, {
   foreignKey: "LocationID",
   as: "Location",
 });
 
-Airport.hasMany(AirportOperator, {
+Airport.hasOne(AirportOperator, {
   foreignKey: "AirportOperatorID",
   as: "AirportOperator",
 });*/
 
-export default Airport;
+export default AirtPort;
 
 //INSERT INTO `AirPort` (`ID`, `Name`, `AirPortCode`, `PriorityOrder`, `LocationID`, `AirportOperatorID`) VALUES (1, 'Ms.', 'incidunt', 0, 1, 1);
