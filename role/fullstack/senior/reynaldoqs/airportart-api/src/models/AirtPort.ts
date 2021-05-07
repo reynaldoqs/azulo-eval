@@ -5,7 +5,7 @@ import Location from "./Location";
 import AirportOperator from "./AirportOperator";
 
 // Inferfaces para la tabla 'Airport'
-interface AirportAttributes {
+export interface AirportAttributes {
   ID: number;
   Name: string;
   AirPortCode: string;
@@ -32,7 +32,6 @@ const Airport = sequelize.define<AirportInstance>(
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
-      unique: true,
     },
     Name: {
       allowNull: true,
@@ -40,8 +39,11 @@ const Airport = sequelize.define<AirportInstance>(
     },
     AirPortCode: { allowNull: true, type: DataTypes.TEXT },
     PriorityOrder: { allowNull: true, type: DataTypes.INTEGER },
-    LocationID: { allowNull: true, type: DataTypes.INTEGER },
-    AirportOperatorID: { allowNull: true, type: DataTypes.INTEGER },
+    LocationID: { type: DataTypes.INTEGER, unique: false },
+    AirportOperatorID: {
+      type: DataTypes.INTEGER,
+      unique: false,
+    },
   },
   {
     // Deshabilitar los campos (updatedAt, createdAt)
@@ -50,16 +52,16 @@ const Airport = sequelize.define<AirportInstance>(
     updatedAt: false,
   }
 );
-
-Airport.hasOne(Location, {
+/*
+Airport.hasMany(Location, {
   foreignKey: "LocationID",
   as: "Location",
 });
 
-Airport.hasOne(AirportOperator, {
+Airport.hasMany(AirportOperator, {
   foreignKey: "AirportOperatorID",
   as: "AirportOperator",
-});
+});*/
 
 export default Airport;
 

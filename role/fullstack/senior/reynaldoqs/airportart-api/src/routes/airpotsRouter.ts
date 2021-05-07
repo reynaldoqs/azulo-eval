@@ -4,11 +4,19 @@ import { changeOperator } from "../controllers";
 
 const airportsRouter = Router();
 
-airportsRouter.get("/", async (req, res) => {
-  console.log("entra a esta ruta");
-  const airport = await changeOperator("asda", "asd");
-  console.log({ airport });
-  res.send("todo bonito");
+// rutas para aeropuertos
+// patch para cambiar los datos de un aeropuerto
+airportsRouter.patch("/:airportId", async (req, res) => {
+  try {
+    // elementos a cambiar en el aeropuerto, en este caso solo el operador
+    const { operatorId } = req.body;
+    // id del aeropuerto a ser modificado
+    const { airportId } = req.params;
+    const airport = await changeOperator(Number(airportId), operatorId);
+    return res.status(200).json({ airport });
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
 });
 
 export default airportsRouter;

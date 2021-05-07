@@ -2,7 +2,7 @@ import { Model, Optional, DataTypes } from "sequelize";
 import { sequelize } from ".";
 
 // Inferfaces para la tabla 'AirportOperator'
-interface AirportOperatorAttributes {
+export interface AirportOperatorAttributes {
   ID: number;
   Name: string;
 }

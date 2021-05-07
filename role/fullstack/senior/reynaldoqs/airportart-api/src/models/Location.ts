@@ -2,7 +2,7 @@ import { Model, Optional, DataTypes } from "sequelize";
 import { sequelize } from ".";
 
 // Inferfaces para la tabla 'Location'
-interface LocationAttributes {
+export interface LocationAttributes {
   ID: number;
   Country: string;
   ProvinceOrState: string;

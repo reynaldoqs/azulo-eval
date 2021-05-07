@@ -1,9 +1,8 @@
 import AirtPort from "../models/AirtPort";
 
-export const changeOperator = async (idAirport: any, idOperator: any) => {
-  const airports = await AirtPort.findByPk(1, {
-    raw: true,
-  });
-  console.log({ airports });
-  return airports;
+// Cambia el operador de un aeropuerto a otro
+export const changeOperator = async (airportId: number, operatorId: number) => {
+  const airport = await AirtPort.findByPk(airportId);
+  if (!airport) throw `${airportId} do es not exist.`;
+  return airport.update({ AirportOperatorID: operatorId });
 };

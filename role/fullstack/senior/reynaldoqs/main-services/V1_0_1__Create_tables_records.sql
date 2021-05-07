@@ -63,10 +63,8 @@ CREATE TABLE `AirPorts` (
   `LocationID` int(11) NOT NULL,
   `AirportOperatorID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
-  UNIQUE KEY `LocationID` (`LocationID`),
-  UNIQUE KEY `AirportOperatorID` (`AirportOperatorID`),
-  CONSTRAINT `FK_AirPortLocation` FOREIGN KEY (`LocationID`) REFERENCES `Locations` (`ID`),
-  CONSTRAINT `FK_FK_AirPortOperator` FOREIGN KEY (`AirportOperatorID`) REFERENCES `AirportOperators` (`ID`)
+  FOREIGN KEY (`LocationID`) REFERENCES `Locations` (`ID`),
+  FOREIGN KEY (`AirportOperatorID`) REFERENCES `AirportOperators` (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `AirPorts` (`ID`, `Name`, `AirPortCode`, `PriorityOrder`, `LocationID`, `AirportOperatorID`) VALUES (1, 'Ms.', 'incidunt', 0, 1, 1);
