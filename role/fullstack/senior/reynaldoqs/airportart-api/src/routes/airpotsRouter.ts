@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { changeOperator } from "../controllers";
+import { changeOperator, changePriorityOrder } from "../controllers";
 
 const airportsRouter = Router();
 
@@ -19,4 +19,15 @@ airportsRouter.patch("/:airportId", async (req, res) => {
   }
 });
 
+// patch para cambiar los ordenes de prioridad
+airportsRouter.post("/set-priorities", async (req, res) => {
+  try {
+    // array de orden de prioridades
+    const { priorityOrders } = req.body;
+    const response = await changePriorityOrder(...priorityOrders);
+    return res.status(200).json({ response });
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
+});
 export default airportsRouter;
