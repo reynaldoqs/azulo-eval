@@ -1,5 +1,6 @@
 import { Model, Optional, DataTypes } from "sequelize";
 import { sequelize } from ".";
+import AirtPort from "./AirtPort";
 
 // Inferfaces para la tabla 'Location'
 export interface LocationAttributes {
@@ -55,6 +56,13 @@ const Location = sequelize.define<LocationInstance>(
     updatedAt: false,
   }
 );
+
+/*
+Location.hasMany(AirtPort, {
+  sourceKey: "ID",
+  foreignKey: "LocationID",
+  as: "AirtPorts",
+});*/
 
 export default Location;
 
