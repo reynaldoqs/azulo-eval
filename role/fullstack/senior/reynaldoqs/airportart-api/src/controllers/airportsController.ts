@@ -22,11 +22,17 @@ export const changePriorityOrder = async (...priorityOrders: OrderChange[]) => {
   return AirtPort.findAll();
 };
 
+export type OrderConfig = "ASC" | "DESC";
+
 // Metodo para obtener todos los aeropuertos
-export const getAirports = async () => {
+export const getAirports = async (config: OrderConfig = "ASC") => {
   // Metodo para conseguir los datos de las assocciaciones, por alguna razon no esta registrando bien las associaciones
   //TODO: configure well squilize associations
-  const airports: any = await AirtPort.findAll({ raw: true });
+  console.log({ config });
+  const airports: any = await AirtPort.findAll({
+    raw: true,
+    order: [["PriorityOrder", config]],
+  });
 
   for (const airport of airports) {
     airport.location = await Location.findByPk(airport.LocationID, {

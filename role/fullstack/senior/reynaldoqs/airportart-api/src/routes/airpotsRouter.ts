@@ -4,15 +4,17 @@ import {
   changeOperator,
   changePriorityOrder,
   getAirports,
+  OrderConfig,
 } from "../controllers";
 
 const airportsRouter = Router();
 
 // rutas para aeropuertos
 // get para obtener todos los aeropuertos
-airportsRouter.get("/", async (_, res) => {
+airportsRouter.get("/", async (req, res) => {
   try {
-    const airports = await getAirports();
+    const order = req.query.order as OrderConfig;
+    const airports = await getAirports(order);
     return res.status(200).json({ airports });
   } catch (error) {
     return res.status(400).json({ error });
