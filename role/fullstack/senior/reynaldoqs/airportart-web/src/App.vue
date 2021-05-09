@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <airport-list/>
+    <airport-list />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import AirportList from "@/components/AirportList.vue"
+import AirportList from "@/components/AirportList.vue";
 
 @Component({
   components: {
-    AirportList
+    AirportList,
   },
 })
 export default class App extends Vue {}
@@ -21,9 +21,11 @@ export default class App extends Vue {}
   --margin-horizontal: 0;
 }
 body {
-  margin:0;
+  margin: 0;
 }
-*,*:after,*:before{
+*,
+*:after,
+*:before {
   box-sizing: border-box;
 }
 #app {
@@ -34,10 +36,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-@media (max-width: 480px) and (min-width: 240px) {
+@media (min-width: 240px) and (max-width: 480px) {
   #app {
     --margin-horizontal: 20px;
     margin: 50px var(--margin-horizontal);
+  }
+}
+@media (min-width: 481px) and (max-width: 720px) {
+  #app {
+    --margin-horizontal: 60px;
+    margin: 120px var(--margin-horizontal);
   }
 }
 </style>
