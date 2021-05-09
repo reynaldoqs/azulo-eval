@@ -1,12 +1,10 @@
 <template>
   <main id="airport-list">
-    <sections>
       <ul class="airport-list">
         <template v-for="airport in airports" >
           <airport-item :airport="airport" v-bind:key="airport.ID" />
         </template>
       </ul>
-    </sections>
   </main>
 </template>
 
@@ -51,6 +49,6 @@ export default class AirportList extends Vue {
   list-style: none;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   grid-auto-rows: 80px;
-  gap: 14px;
+  gap: 10px;
 }
 </style>
