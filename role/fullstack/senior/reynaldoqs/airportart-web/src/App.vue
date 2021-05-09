@@ -48,4 +48,10 @@ body {
     margin: 120px var(--margin-horizontal);
   }
 }
+@media (min-width: 721px) and (max-width: 1280px) {
+  #app {
+    --margin-horizontal: 90px;
+    margin: 200px var(--margin-horizontal);
+  }
+}
 </style>
