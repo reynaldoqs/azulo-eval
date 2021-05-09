@@ -49,7 +49,7 @@ export default class AirportList extends Vue {
   margin: 0;
   display: grid;
   list-style: none;
-  grid-template-columns: repeat(auto-fill, 160px);
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   grid-auto-rows: 80px;
   gap: 14px;
 }
