@@ -7,6 +7,7 @@ export interface Airport {
   PriorityOrder: number;
   LocationID: number;
   AirportOperatorID: number;
+  currentPriority?: number;
 }
 
 export interface FullAirport extends Airport {

@@ -13,3 +13,8 @@ type AirportResponse = {
 export const getAirports = (): Promise<AirportResponse> => {
   return airportAPI.read<AirportResponse>();
 };
+
+// metodo para actualizar orden de priroidades de los aeropuertos del API
+export const postPriorityOrders = (data: any): Promise<AirportResponse> => {
+  return airportAPI.create<AirportResponse>("set-priorities", data);
+};

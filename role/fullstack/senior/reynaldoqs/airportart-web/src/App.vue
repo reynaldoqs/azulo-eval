@@ -1,7 +1,10 @@
 <template>
+  <main>
+  <header><h1>Aeropuertos</h1></header>
   <div id="app">
     <airport-list />
   </div>
+  </main>
 </template>
 
 <script lang="ts">
@@ -22,10 +25,19 @@ export default class App extends Vue {}
 }
 body {
   margin: 0;
-  background-color: #EEEEEE;
-  font-family: 'Open Sans', sans-serif;
+  background-color: #eeeeee;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
   line-height: 16px;
+}
+header {
+  background-color: #313131;
+  color: #f1f1f1;
+  padding: 10px 20px;
+}
+header > h1 {
+  font-size: 22px;
+  line-height:22px;
 }
 *,
 *:after,
@@ -35,10 +47,9 @@ body {
 #app {
   width: calc(100% - (var(--margin-horizontal) * 2));
   max-width: 1280px;
-  height: 100vh;
   margin: 0 auto;
   padding: 10px;
-  background-color: #FFF;
+  background-color: #fff;
 }
 @media (min-width: 240px) and (max-width: 480px) {
   #app {
