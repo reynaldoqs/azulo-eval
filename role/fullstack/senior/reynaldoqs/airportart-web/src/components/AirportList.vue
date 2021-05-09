@@ -1,34 +1,107 @@
 <template>
   <main id="airport-list">
-      <ul class="airport-list">
-        <template v-for="airport in airports" >
-          <airport-item :airport="airport" v-bind:key="airport.ID" />
-        </template>
-      </ul>
+    <div class="draggable-container">
+      <div class="controls">
+        <button @click="updatePriorities">Guardar prioridades</button>
+      </div>
+      <div v-if="isLoading">Loading...</div>
+      <div v-else-if="airports.length > 0">
+        <grid-layout
+          :layout.sync="airports"
+          :col-num="6"
+          :row-height="30"
+          :is-draggable="draggable"
+          :is-resizable="resizable"
+          :responsive="responsive"
+          :vertical-compact="true"
+          :use-css-transforms="true"
+        >
+          <grid-item
+            v-for="item in airports"
+            v-bind:key="item.i"
+            :static="item.static"
+            :x="item.x"
+            :y="item.y"
+            :w="item.w"
+            :h="item.h"
+            :i="item.i"
+          >
+            <airport-item :airport="item" v-bind:key="item.ID" />
+          </grid-item>
+        </grid-layout>
+      </div>
+    </div>
   </main>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { getAirports } from "@/services/airport";
+import { getAirports, postPriorityOrders } from "@/services/airport";
 import { FullAirport } from "@/types";
 import AirportItem from "@/components/AirportItem.vue";
+import { GridLayout, GridItem } from "vue-grid-layout";
 
 @Component({
   components: {
     AirportItem,
+    GridLayout,
+    GridItem,
   },
 })
 export default class AirportList extends Vue {
   public airports: FullAirport[] = [];
   public isLoading = false;
+  public draggable = true;
+  public resizable = false;
+  public responsive = false;
+
+  // Metodo para actualizar las prioridaddes
+  public async updatePriorities(): Promise<void> {
+    try {
+      const priorityOrders = this.airports.map((airport: any) => ({
+        airportId: airport.ID,
+        newOrder: 1 + airport.x + airport.y * 2,
+      }));
+      this.isLoading = true;
+      await postPriorityOrders({ priorityOrders });
+      this.isLoading = false;
+      this.fetchAirports();
+    } catch (error) {
+      this.isLoading = false;
+      console.error(error);
+    }
+  }
+
+  // metodo para acomodar los airports para la libreria de drag y drop
+  public mapToDraggable(airports: FullAirport[]): any[] {
+    const cols = 6;
+    const inW = 1;
+    const inH = 3;
+    let rowIndex = 0;
+    let colIndex = -1;
+    return airports.map((airport: FullAirport, index: number) => {
+      colIndex = colIndex + inW;
+      rowIndex = Math.trunc((index * inW) / cols) * inH;
+      if (colIndex >= cols) colIndex = 0;
+
+      return {
+        ...airport,
+        x: colIndex,
+        y: rowIndex,
+        w: inW,
+        h: inH,
+        i: airport.ID,
+        currentPriority: airport.PriorityOrder,
+      };
+    });
+  }
 
   // metodo para cargar los aeropuertos desde el API
   public async fetchAirports(): Promise<void> {
     try {
       this.isLoading = true;
       const { airports } = await getAirports();
-      this.airports = airports;
+      this.airports = this.mapToDraggable(airports);
       this.isLoading = false;
     } catch (error) {
       this.isLoading = false;
@@ -40,15 +113,20 @@ export default class AirportList extends Vue {
   }
 }
 </script>
-
 <style scoped>
-.airport-list {
-  padding: 0;
-  margin: 0;
-  display: grid;
-  list-style: none;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  grid-auto-rows: 80px;
-  gap: 10px;
+.controls {
+  width: 100%;
+  padding: 12px;
+  background-color: #414141;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+.controls button {
+  border: none;
+  background-color: palegreen;
+  color: black;
+  padding: 6px 20px;
 }
 </style>

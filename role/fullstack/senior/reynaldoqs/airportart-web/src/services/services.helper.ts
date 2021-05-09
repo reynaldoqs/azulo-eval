@@ -11,6 +11,16 @@ const crudder = (path: string) => (resource: string) => {
       });
       return res.json();
     },
+    create: async <T extends any>(action: string, data: any): Promise<T> => {
+      const res = await fetch(`${url}/${action}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      return res.json();
+    },
   };
 };
 
