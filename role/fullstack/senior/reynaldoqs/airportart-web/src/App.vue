@@ -23,6 +23,9 @@ export default class App extends Vue {}
 body {
   margin: 0;
   background-color: #EEEEEE;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: 16px;
 }
 *,
 *:after,
@@ -35,9 +38,6 @@ body {
   height: 100vh;
   margin: 0 auto;
   padding: 10px;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   background-color: #FFF;
 }
 @media (min-width: 240px) and (max-width: 480px) {
