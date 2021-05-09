@@ -25,6 +25,6 @@ export default class AirportList extends Vue {
   font-size: .8rem;
   padding: 8px;
   box-sizing: border-box;
-  box-shadow: 2px 3px 7px #b2b2b2;
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.20);
 }
 </style>
