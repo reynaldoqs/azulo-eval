@@ -1,12 +1,12 @@
 <template>
   <main id="airport-list">
-    <section class="airport-list">
-      <ul>
-        <li v-for="airport in airports" v-bind:key="airport.ID">
-          <airport-item :airport="airport" />
-        </li>
+    <sections>
+      <ul class="airport-list">
+        <template v-for="airport in airports" >
+          <airport-item :airport="airport" v-bind:key="airport.ID" />
+        </template>
       </ul>
-    </section>
+    </sections>
   </main>
 </template>
 
@@ -32,7 +32,6 @@ export default class AirportList extends Vue {
       const { airports } = await getAirports();
       this.airports = airports;
       this.isLoading = false;
-      console.log({ airports });
     } catch (error) {
       this.isLoading = false;
       console.error(error);
@@ -45,7 +44,13 @@ export default class AirportList extends Vue {
 </script>
 
 <style scoped>
-#airport-list {
-  background-color: #f1f1f1
+.airport-list {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  list-style: none;
+  grid-template-columns: repeat(auto-fill, 160px);
+  grid-auto-rows: 80px;
+  gap: 14px;
 }
 </style>

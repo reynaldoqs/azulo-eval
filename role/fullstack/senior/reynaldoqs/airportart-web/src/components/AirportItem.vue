@@ -1,9 +1,10 @@
 <template>
   <li id="airport-item">
     <div class="airport-item">
-      i. {{airport.AirPortCode}} - {{airport.Name}}
-      ii. {{airport.location.ProvinceOrState}} - {{airport.location.Country}}
-      iii. Administrado por: {{airport.operator.Name}}
+      <div><strong>Aeropuerto: </strong>{{airport.Name}}</div>
+      <div><strong>Codigo: </strong>{{airport.AirPortCode}}</div>
+      <div>{{airport.location.ProvinceOrState}} - {{airport.location.Country}}</div>
+      <div><strong>Admin: </strong>{{airport.operator.Name}}</div>
     </div>
   </li>
 </template>
@@ -20,7 +21,10 @@ export default class AirportList extends Vue {
 
 <style scoped>
 #airport-item {
-  width: 160px;
-  height: 80px;
+  background-color: #fafafa;
+  font-size: .8rem;
+  padding: 8px;
+  box-sizing: border-box;
+  box-shadow: 2px 3px 7px #b2b2b2;
 }
 </style>
