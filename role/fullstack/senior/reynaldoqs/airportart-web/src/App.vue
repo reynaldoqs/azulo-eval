@@ -22,6 +22,7 @@ export default class App extends Vue {}
 }
 body {
   margin: 0;
+  background-color: #EEEEEE;
 }
 *,
 *:after,
@@ -30,11 +31,14 @@ body {
 }
 #app {
   width: calc(100% - (var(--margin-horizontal) * 2));
+  max-width: 1280px;
   height: 100vh;
-  margin: 0;
+  margin: 0 auto;
+  padding: 10px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #FFF;
 }
 @media (min-width: 240px) and (max-width: 480px) {
   #app {
@@ -52,6 +56,12 @@ body {
   #app {
     --margin-horizontal: 90px;
     margin: 200px var(--margin-horizontal);
+  }
+}
+@media (min-width: 1281px) {
+  #app {
+    --margin-horizontal: 90px;
+    margin: 200px auto;
   }
 }
 </style>
